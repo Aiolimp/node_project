@@ -1,0 +1,9 @@
+# GET http://localhost:3000/user/index http/1.1
+
+POST http://localhost:3000/user/create http/1.1
+Content-Type: application/json
+
+{
+    "name": "John",
+     "email": "12dwd31@qq.com"
+}
