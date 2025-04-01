@@ -12,6 +12,6 @@ export class UserDto {
   // 邮箱属性
   @IsNotEmpty({ message: '邮箱必填' }) // 验证不能为空
   @IsEmail({}, { message: '邮箱格式不正确' }) // 验证邮箱格式
-  @Transform((user) => user.value.trim()) // 自动去除前后空格
+  @Transform((user) => user.value.trim()) //自动去除前后空格
   email: string;
 }
