@@ -3,8 +3,8 @@ import { controller, httpGet as GetMapping, httpPost as PostMapping } from 'inve
 import { UserService } from './service'; // 用户服务层
 import { inject } from 'inversify'; // 依赖注入装饰器
 import { Request, Response } from 'express'; // Express请求响应类型
-
-@controller('/user') // 定义基础路由路径为/user
+import { JWT } from '../jwt'; // jwt模块
+@controller('/user')
 export class User {
   // 构造函数注入UserService实例
   constructor(
@@ -12,8 +12,9 @@ export class User {
   ) {}
 
   // 处理GET /user/index请求
-  @GetMapping('/index')
+  @GetMapping('/index', JWT.middleware())
   public async getIndex(req: Request, res: Response) {
+    console.log(req);
     // 调用服务层获取用户列表
     let result = await this.userService.getList();
     // 返回查询结果

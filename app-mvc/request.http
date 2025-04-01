@@ -1,9 +1,10 @@
-# GET http://localhost:3000/user/index http/1.1
+GET http://localhost:3000/user/index http/1.1
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6IkpvaG4iLCJlbWFpbCI6IjEyZHdkd2QyMzIzMzFAcXEuY29tIiwiaWF0IjoxNzQzNDk5OTE3LCJleHAiOjE3NDQxMDQ3MTd9.nk5ZNKEPtYXnEv_jLiZXn8PnxbsPWb61iU6HDtVf2c0
 
-POST http://localhost:3000/user/create http/1.1
-Content-Type: application/json
+# POST http://localhost:3000/user/create http/1.1
+# Content-Type: application/json
 
-{
-    "name": "John",
-     "email": "12dwd31@qq.com"
-}
+# {
+#     "name": "John",
+#      "email": "12dwdwd232331@qq.com"
+# }

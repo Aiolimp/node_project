@@ -7,6 +7,7 @@ import { User } from './src/user/controller'; // 用户控制器
 import express from 'express'; // Express 框架
 import { PrismaClient } from '@prisma/client'; // Prisma 客户端
 import { PrismaDB } from './src/db/index'; // Prisma 数据库封装
+import { JWT } from './src/jwt';
 
 // 创建依赖注入容器
 const container = new Container(); // 初始化IoC容器
@@ -29,12 +30,18 @@ container.bind<PrismaClient>('PrismaClient').toFactory(() => {
 
 container.bind(PrismaDB).to(PrismaDB); // 注册Prisma数据库封装到容器
 
+/**
+ * jwt模块
+ */
+container.bind(JWT).to(JWT); //主要代码
+
 // 创建Inversify Express服务器
 const server = new InversifyExpressServer(container); // 使用容器创建服务器实例
 
 // 配置Express中间件
 server.setConfig((app) => {
   app.use(express.json()); // 添加JSON请求体解析中间件
+  app.use(container.get(JWT).init()); // 添加JWT初始化中间件
 });
 
 // 构建Express应用

@@ -4,11 +4,12 @@ import { PrismaDB } from '../db/index'; // 数据库访问层
 import { UserDto } from './user.dto'; // 用户数据传输对象
 import { plainToClass } from 'class-transformer'; // DTO转换工具
 import { validate } from 'class-validator'; // DTO验证工具
+import { JWT } from '../jwt';
 
 @injectable() // 标记该类可被依赖注入容器管理
 export class UserService {
   // 构造函数注入PrismaDB实例
-  constructor(@inject(PrismaDB) private readonly PrismaDB: PrismaDB) {}
+  constructor(@inject(PrismaDB) private readonly PrismaDB: PrismaDB, @inject(JWT) private readonly jwt: JWT) {}
 
   // 获取用户列表
   public async getList() {
@@ -36,8 +37,13 @@ export class UserService {
       return dto; // 返回错误信息集合
     } else {
       // 验证通过，创建用户
-      const userInfo = await this.PrismaDB.prisma.user.create({ data: user });
-      return userInfo; // 返回创建的用户信息
+      const result = await this.PrismaDB.prisma.user.create({
+        data: user,
+      });
+      return {
+        ...result,
+        token: this.jwt.createToken(result), //生成token
+      };
     }
   }
 }
