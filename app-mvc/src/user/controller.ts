@@ -1,21 +1,31 @@
-import { controller, httpGet as GetMapping, httpPost as PostMapping } from 'inversify-express-utils';
-import { UserService } from './service';
-import { inject } from 'inversify'; // 装饰器
-import { Request, Response } from 'express'; // 类型
-@controller('/user')
+// 导入必要的装饰器和类型
+import { controller, httpGet as GetMapping, httpPost as PostMapping } from 'inversify-express-utils'; // 路由控制器装饰器
+import { UserService } from './service'; // 用户服务层
+import { inject } from 'inversify'; // 依赖注入装饰器
+import { Request, Response } from 'express'; // Express请求响应类型
+
+@controller('/user') // 定义基础路由路径为/user
 export class User {
+  // 构造函数注入UserService实例
   constructor(
-    @inject(UserService) private readonly userService: UserService //依赖注入
+    @inject(UserService) private readonly userService: UserService // 依赖注入用户服务
   ) {}
-  @GetMapping('/index') //get请求
+
+  // 处理GET /user/index请求
+  @GetMapping('/index')
   public async getIndex(req: Request, res: Response) {
-    let result = await this.userService.getList(); //调用service方法
-    res.send(result); //返回结果
+    // 调用服务层获取用户列表
+    let result = await this.userService.getList();
+    // 返回查询结果
+    res.send(result);
   }
 
-  @PostMapping('/create') //post请求
+  // 处理POST /user/create请求
+  @PostMapping('/create')
   public async createUser(req: Request, res: Response) {
+    // 调用服务层创建用户
     const user = await this.userService.createUser(req.body);
+    // 返回创建结果
     res.send(user);
   }
 }
