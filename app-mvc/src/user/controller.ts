@@ -20,7 +20,6 @@ export class User {
     // 返回查询结果
     res.send(result);
   }
-
   // 处理POST /user/create请求
   @PostMapping('/create')
   public async createUser(req: Request, res: Response) {
