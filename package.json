@@ -10,6 +10,7 @@
     "jsdom": "^25.0.1",
     "magic-string": "^0.30.11",
     "nanoid": "^3.3.7",
+    "node-schedule": "^2.1.1",
     "picocolors": "^1.1.0",
     "postcss": "^8.4.45",
     "source-map-js": "^1.2.0",

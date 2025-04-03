@@ -1,0 +1,16 @@
+{
+  "name": "schedule",
+  "version": "1.0.0",
+  "main": "schedule.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "node-schedule": "^2.1.1"
+  }
+}
